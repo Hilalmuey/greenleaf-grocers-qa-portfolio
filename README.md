@@ -63,14 +63,21 @@ The full report covers requirements, test cases, both defect records, actual exe
 
 Key evidence is available in the [`evidence/`](evidence/) folder. Some evidence screenshots are **composed from real recorded local test outputs**, and local Jira/PR records are **training simulations** rather than commercial tool screenshots.
 
-## Setup / reproduction notes
+## Source code: Playwright & SQL
 
-This repository is a **documentation and evidence portfolio**. The training application's source code and exact executable test project are **not included**, so the Playwright test cannot be rerun solely from this repository. The original test was executed inside a Coursera lab VM.
+- **[Playwright guest-checkout test](tests/checkout.spec.js)** — JavaScript E2E happy-path test using `getByTestId`, a guest checkout without an expired promo code, and assertions for successful checkout and a non-empty order ID. The published code is **reconstructed from the documented lab steps and selectors**, rather than claimed to be a byte-for-byte copy of the original VM file.
+- **[SQL order validation](queries/order_validation.sql)** — the original SQL logic used to locate the latest saved order for `capstone.guest@example.test` by joining `orders` and `users`.
+
+### Setup / reproduction notes
+
+This is a **training portfolio**, not a self-contained app. The original GreenLeaf application, its test data, Playwright dependencies/configuration and SQLite database belong to the Coursera lab and are **not included**. Thus, uploading the source files does **not** mean a visitor can execute the test against this GitHub repository alone.
+
+In the original lab environment, the guest-checkout Playwright test ran successfully (**1 test passed**) and the SQL query found the order. These historical results are documented in [`evidence/`](evidence/) and the [portfolio report](docs/GreenLeaf_QA_Portfolio.pdf); **no new GitHub execution is claimed**.
 
 To review the work:
-1. Read the [portfolio report](docs/GreenLeaf_QA_Portfolio.pdf).
-2. Inspect the [`evidence/`](evidence/) screenshots.
-3. Cross-reference results and limitations with the test summary and release recommendation in the report.
+1. Read the [Playwright source](tests/checkout.spec.js) and [SQL query](queries/order_validation.sql).
+2. Read the [portfolio report](docs/GreenLeaf_QA_Portfolio.pdf).
+3. Inspect the [`evidence/`](evidence/) screenshots and documented execution limitations.
 
 ## QA takeaways
 
